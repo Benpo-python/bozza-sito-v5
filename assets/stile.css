@@ -160,8 +160,8 @@ p{text-wrap:pretty}
 @keyframes entra{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
 
 /* giostra 3D dei siti */
-.giostra{position:relative;margin:8px 0 clamp(56px,8vw,120px);height:clamp(400px,44vw,580px);perspective:1400px;perspective-origin:50% 30%;overflow:visible}
-.giostra-anello{position:absolute;left:50%;top:42%;width:0;height:0;transform-style:preserve-3d;transform:rotateX(-7deg) rotateY(var(--g,0deg));will-change:transform;cursor:grab;touch-action:pan-y}
+.giostra{position:relative;margin:8px 0 clamp(40px,5vw,80px);height:calc(var(--lt)*3.3 + 140px);perspective:1400px;perspective-origin:50% 30%;overflow:visible}
+.giostra-anello{position:absolute;left:50%;top:40%;width:0;height:0;transform-style:preserve-3d;transform:rotateX(-7deg) rotateY(var(--g,0deg));will-change:transform;cursor:grab;touch-action:pan-y}
 .giostra-anello.trascino{cursor:grabbing}
 @media (prefers-reduced-motion:no-preference){html:not(.js) .giostra-anello{animation:gira 44s linear infinite}}
 @keyframes gira{from{transform:rotateX(-7deg) rotateY(var(--g,0deg))}to{transform:rotateX(-7deg) rotateY(calc(var(--g,0deg) + 360deg))}}
@@ -619,7 +619,7 @@ p{text-wrap:pretty}
   .garanzie{flex-direction:column;align-items:flex-start;gap:8px;align-self:flex-start}
   .hero-testo{text-align:left;align-items:flex-start}
   .azioni{justify-content:flex-start}
-  .giostra{height:400px;margin-bottom:64px}.giostra-anello{top:38%}.giostra-nota{margin-top:28px;text-align:left}
+  .giostra{height:calc(var(--lt)*3.3 + 150px);margin-bottom:40px}.giostra-anello{top:38%}.giostra-nota{margin-top:28px;text-align:left}
   .chiusura-az,.chiusura-az .btn{width:100%}
   .chiusura{flex-direction:column;align-items:stretch}
   .domande-lista,.mano-lista,.fno,.doppia,.due,.pacchetti,.passi{grid-template-columns:minmax(0,1fr)}
