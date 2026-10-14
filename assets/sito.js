@@ -1,4 +1,4 @@
-/* La bottega del web, v5: progresso, barra, cursore, titolo parola per parola, giostra 3D, pulsanti magnetici, parole che si accendono. Nessuna dipendenza. */
+/* La bottega del web, v5: progresso, barra, titolo parola per parola, giostra 3D, pulsanti magnetici, parole che si accendono. Nessuna dipendenza. */
 (function(){
   var doc=document.documentElement,ridotto=matchMedia("(prefers-reduced-motion:reduce)").matches,fine=matchMedia("(hover:hover) and (pointer:fine)").matches;
   doc.classList.add("js");
