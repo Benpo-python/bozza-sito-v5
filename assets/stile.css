@@ -161,9 +161,9 @@ p{text-wrap:pretty}
 
 /* giostra 3D dei siti */
 .giostra{position:relative;margin-top:8px;height:clamp(400px,44vw,580px);perspective:1400px;perspective-origin:50% 30%;overflow:visible}
-.giostra-anello{position:absolute;left:50%;top:42%;width:0;height:0;transform-style:preserve-3d;transform:rotateX(-7deg) rotateY(var(--g,0deg));will-change:transform;cursor:grab}
+.giostra-anello{position:absolute;left:50%;top:42%;width:0;height:0;transform-style:preserve-3d;transform:rotateX(-7deg) rotateY(var(--g,0deg));will-change:transform;cursor:grab;touch-action:pan-y}
 .giostra-anello.trascino{cursor:grabbing}
-@media (prefers-reduced-motion:no-preference){.giostra-anello:not(.fermo){animation:gira 44s linear infinite}.giostra:hover .giostra-anello{animation-play-state:paused}}
+@media (prefers-reduced-motion:no-preference){html:not(.js) .giostra-anello{animation:gira 44s linear infinite}}
 @keyframes gira{from{transform:rotateX(-7deg) rotateY(var(--g,0deg))}to{transform:rotateX(-7deg) rotateY(calc(var(--g,0deg) + 360deg))}}
 .giostra-tel{position:absolute;left:0;top:0;width:var(--lt,170px);margin-left:calc(var(--lt,170px)/-2);margin-top:calc(var(--lt,170px)*-1.05);transform:rotateY(calc(var(--n)*51.43deg)) translateZ(var(--raggio,300px));transform-style:preserve-3d;text-decoration:none;color:var(--ink)}
 .giostra-tel .tel{box-shadow:var(--om-tel);transition:transform .4s var(--ease);backface-visibility:hidden;-webkit-backface-visibility:hidden}
@@ -267,7 +267,11 @@ p{text-wrap:pretty}
   .js .orizz-testa{padding:0 0 clamp(28px,4vw,48px)}
   .js .passi{display:flex;gap:28px;padding-bottom:0;width:max-content;transform:translate3d(var(--tx,0px),0,0);will-change:transform}
   .js .passi li{width:min(38vw,520px);min-height:min(46vh,420px);flex:none}
+  .js .orizz-fermo{cursor:grab;user-select:none}.js .orizz-fermo.trascino{cursor:grabbing}
+  .js .orizz-prog{display:block}
 }
+.orizz-prog{display:none;margin-top:28px;height:3px;background:rgba(255,255,255,.14);border-radius:2px;overflow:hidden}
+.orizz-prog i{display:block;height:100%;width:100%;background:var(--corallo);transform:scaleX(var(--p,0));transform-origin:left}
 
 /* pacchetti */
 .pacchetti{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.12fr);gap:22px;align-items:stretch}
