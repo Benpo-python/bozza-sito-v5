@@ -10,6 +10,7 @@
   --nebbia:#B9BCC6; --linea:#E1DDD4; --linea-forte:#8E8A80;
   --corallo:#FF5C4D; --corallo-h:#FF7366; --corallo-t:#D63A2A;
   --pesca:#FFC9A8; --lavanda:#CFC8FF; --menta:#BDF0DC; --limone:#FFF1A8;
+  --blu:#0F1E3D; --oro:#E3C27A;
   --errore:#B42318;
   --sans:"Archivo",system-ui,-apple-system,"Segoe UI",sans-serif;
   --mono:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;
@@ -124,6 +125,14 @@ p{text-wrap:pretty}
   .aurora .a4{animation:nuvola 20s ease-in-out infinite alternate-reverse}
 }
 @keyframes nuvola{0%{transform:translate3d(0,0,0) scale(1)}50%{transform:translate3d(-8%,6%,0) scale(1.12)}100%{transform:translate3d(6%,-5%,0) scale(.94)}}
+/* fotografia della hero, in trasparenza sotto l'aurora */
+.hero-foto{position:absolute;inset:0;z-index:-3;pointer-events:none;overflow:hidden}
+.hero-foto img{width:100%;height:100%;object-fit:cover;object-position:center 30%;opacity:.58;filter:saturate(.8) contrast(1.05)}
+.hero-foto::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(247,245,240,.2) 0%,rgba(247,245,240,.42) 50%,var(--osso) 88%),radial-gradient(60% 55% at 50% 48%,rgba(247,245,240,.55),transparent 75%)}
+.hero .aurora i{opacity:.38;mix-blend-mode:multiply}
+@media (prefers-reduced-motion:no-preference){.hero-foto img{animation:zoomlento 24s ease-in-out infinite alternate}}
+@keyframes zoomlento{from{transform:scale(1)}to{transform:scale(1.06)}}
+@media (max-width:759px){.hero-foto img{opacity:.5;object-position:38% 30%}}
 .grana{position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:.5;background-image:radial-gradient(rgba(17,19,24,.16) 1px,transparent 1.2px);background-size:22px 22px;-webkit-mask-image:linear-gradient(180deg,transparent,#000 30%,#000 70%,transparent);mask-image:linear-gradient(180deg,transparent,#000 30%,#000 70%,transparent)}
 
 /* ---------- hero ---------- */
@@ -178,12 +187,12 @@ p{text-wrap:pretty}
 .hero-fig{display:contents}
 
 /* insegna scorrevole */
-.insegna-box{overflow:hidden;background:var(--osso);padding:26px 0 30px;margin-top:0}
-.insegna{background:var(--corallo);color:var(--ink);overflow:hidden;padding:18px 0;border-top:2px solid var(--ink);border-bottom:2px solid var(--ink);transform:rotate(-1.2deg);margin:0 -40px}
+.insegna-box{overflow:hidden;background:var(--osso);padding:0 0 clamp(24px,3vw,40px);margin-top:0}
+.insegna{background:var(--blu);color:var(--oro);overflow:hidden;padding:22px 0;border-top:1px solid rgba(227,194,122,.45);border-bottom:1px solid rgba(227,194,122,.45);box-shadow:0 20px 50px -30px rgba(15,30,61,.6)}
 .insegna-pista{display:flex;gap:0;width:max-content;white-space:nowrap}
-.insegna span{font-stretch:118%;font-weight:800;font-size:clamp(22px,2.6vw,36px);letter-spacing:-.03em;text-transform:uppercase;padding:0 .6em;display:inline-flex;align-items:center;gap:.6em}
-.insegna span::after{content:"";width:.42em;height:.42em;border-radius:50%;background:var(--ink)}
-@media (prefers-reduced-motion:no-preference){.insegna-pista{animation:scorri 32s linear infinite}}
+.insegna span{font-stretch:100%;font-weight:600;font-size:clamp(14px,1.25vw,17px);letter-spacing:.22em;text-transform:uppercase;padding:0 1.6em;display:inline-flex;align-items:center;gap:1.6em}
+.insegna span::after{content:"";width:6px;height:6px;border-radius:50%;background:var(--oro);opacity:.8}
+@media (prefers-reduced-motion:no-preference){.insegna-pista{animation:scorri 60s linear infinite}}
 @keyframes scorri{to{transform:translateX(-50%)}}
 
 /* ---------- sezioni ---------- */
@@ -648,7 +657,6 @@ p{text-wrap:pretty}
   .domande details p{padding-right:0}
   .centro .azioni{flex-direction:column;width:100%}
   .centro .azioni .btn{width:100%}
-  .insegna{transform:rotate(-2deg)}
 }
 @media (max-width:420px){
   .cifra{font-size:64px}
