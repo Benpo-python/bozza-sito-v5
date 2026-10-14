@@ -25,14 +25,19 @@
     an.addEventListener("pointerup",fine_);an.addEventListener("pointercancel",fine_);an.addEventListener("lostpointercapture",fine_);
     an.addEventListener("click",function(e){if(mosso){e.preventDefault();e.stopPropagation()}},true);
     an.addEventListener("dragstart",function(e){e.preventDefault()})}
-  /* come funziona: le carte scorrono in orizzontale mentre la pagina scorre (da 1024 px); si possono anche trascinare */
+  /* come funziona: le carte scorrono in orizzontale mentre la pagina scorre (da 1024 px); aggiornate a ogni frame con smorzamento; si possono anche trascinare */
   var oz=document.querySelector(".orizz"),pa=oz&&oz.querySelector(".passi"),fermo=oz&&oz.querySelector(".orizz-fermo"),prog=oz&&oz.querySelector(".orizz-prog");
-  if(oz&&pa&&!ridotto){var mq=matchMedia("(min-width:1024px)"),maxO=0,corsa=1;
-    function orizz(){if(!mq.matches){pa.style.setProperty("--tx","0px");return}var w=pa.parentElement,cs=getComputedStyle(w),vis=w.clientWidth-parseFloat(cs.paddingLeft)-parseFloat(cs.paddingRight);maxO=Math.max(0,pa.scrollWidth-vis);corsa=Math.max(1,oz.offsetHeight-innerHeight);var p=Math.min(1,Math.max(0,(scrollY-oz.offsetTop)/corsa));pa.style.setProperty("--tx",(-maxO*p).toFixed(1)+"px");if(prog)prog.style.setProperty("--p",p.toFixed(3))}
-    orizz();addEventListener("scroll",orizz,{passive:true});addEventListener("resize",orizz);addEventListener("load",orizz);
+  if(oz&&pa&&!ridotto){var mq=matchMedia("(min-width:1024px)"),maxO=0,corsa=1,txA=0,pA=0,ultimo=-1;
+    function misura(){var w=pa.parentElement,cs=getComputedStyle(w),vis=w.clientWidth-parseFloat(cs.paddingLeft)-parseFloat(cs.paddingRight);maxO=Math.max(0,pa.scrollWidth-vis);corsa=Math.max(1,oz.offsetHeight-innerHeight)}
+    function quadro(){if(!mq.matches){if(ultimo!==0){pa.style.setProperty("--tx","0px");ultimo=0}requestAnimationFrame(quadro);return}
+      var r=oz.getBoundingClientRect();if(r.bottom>-200&&r.top<innerHeight+200){var p=Math.min(1,Math.max(0,(-r.top)/corsa)),txT=-maxO*p;
+        txA+=(txT-txA)*.22;pA+=(p-pA)*.22;if(Math.abs(txT-txA)<.3)txA=txT;if(Math.abs(p-pA)<.002)pA=p;
+        if(txA!==ultimo){pa.style.setProperty("--tx",txA.toFixed(2)+"px");if(prog)prog.style.setProperty("--p",pA.toFixed(4));ultimo=txA}}
+      requestAnimationFrame(quadro)}
+    misura();addEventListener("resize",misura);addEventListener("load",misura);requestAnimationFrame(quadro);
     if(fermo){var ox=null,oy=0,om=false;
       fermo.addEventListener("pointerdown",function(e){if(e.button||!mq.matches||e.target.closest("a,button"))return;ox=e.clientX;oy=scrollY;om=false;fermo.classList.add("trascino");fermo.setPointerCapture(e.pointerId)});
-      fermo.addEventListener("pointermove",function(e){if(ox===null)return;var d=e.clientX-ox;if(Math.abs(d)>3)om=true;if(maxO>0){document.documentElement.style.scrollBehavior="auto";scrollTo(0,oy-d*(corsa/maxO))}});
+      fermo.addEventListener("pointermove",function(e){if(ox===null)return;var d=e.clientX-ox;if(Math.abs(d)>3)om=true;if(maxO>0){document.documentElement.style.scrollBehavior="auto";var t0=oz.offsetTop;scrollTo(0,Math.min(t0+corsa,Math.max(t0,oy-d*(corsa/maxO))))}});
       function fineO(){if(ox===null)return;ox=null;fermo.classList.remove("trascino");document.documentElement.style.scrollBehavior=""}
       fermo.addEventListener("pointerup",fineO);fermo.addEventListener("pointercancel",fineO);fermo.addEventListener("lostpointercapture",fineO);
       fermo.addEventListener("click",function(e){if(om){e.preventDefault();e.stopPropagation()}},true)}}

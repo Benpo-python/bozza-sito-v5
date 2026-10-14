@@ -265,13 +265,14 @@ p{text-wrap:pretty}
   .js .orizz{height:260vh}
   .js .orizz-fermo{position:sticky;top:0;height:100vh;overflow:hidden;display:flex;flex-direction:column;justify-content:center}
   .js .orizz-testa{padding:0 0 clamp(28px,4vw,48px)}
-  .js .passi{display:flex;gap:28px;padding-bottom:0;width:max-content;transform:translate3d(var(--tx,0px),0,0);will-change:transform}
+  .js .passi{display:flex;gap:28px;padding-bottom:0;width:max-content;transform:translate3d(var(--tx,0px),0,0);will-change:transform;backface-visibility:hidden}
+  .js .orizz-fermo{will-change:transform;transform:translateZ(0)}
   .js .passi li{width:min(38vw,520px);min-height:min(46vh,420px);flex:none}
   .js .orizz-fermo{cursor:grab;user-select:none}.js .orizz-fermo.trascino{cursor:grabbing}
   .js .orizz-prog{display:block}
 }
 .orizz-prog{display:none;margin-top:28px;height:3px;background:rgba(255,255,255,.14);border-radius:2px;overflow:hidden}
-.orizz-prog i{display:block;height:100%;width:100%;background:var(--corallo);transform:scaleX(var(--p,0));transform-origin:left}
+.orizz-prog i{display:block;height:100%;width:100%;background:var(--corallo);transform:scaleX(var(--p,0));transform-origin:left;will-change:transform}
 
 /* pacchetti */
 .pacchetti{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.12fr);gap:22px;align-items:stretch}
