@@ -267,16 +267,12 @@ p{text-wrap:pretty}
 .passi li.ultimo .titolo{color:var(--ink);font-stretch:118%;font-weight:800;font-size:clamp(26px,2.2vw,34px);letter-spacing:-.04em;line-height:1}
 .passi .desc{color:var(--nebbia)}
 .passi li.ultimo .desc{color:rgba(17,19,24,.75)}
-@supports (animation-timeline:view()){
-  @media (min-width:1024px) and (prefers-reduced-motion:no-preference){
-    .orizz{height:260vh;view-timeline-name:--orizz;view-timeline-axis:block}
-    .orizz-fermo{position:sticky;top:0;height:100vh;overflow:hidden;display:flex;flex-direction:column;justify-content:center}
-    .orizz-testa{padding:0 0 clamp(28px,4vw,48px)}
-    .passi{display:flex;gap:28px;padding-bottom:0;width:max-content;animation:scorri-x linear both;animation-timeline:--orizz;animation-range:contain 0% contain 100%}
-    .passi li{width:min(38vw,520px);min-height:min(46vh,420px);flex:none}
-    @keyframes scorri-x{to{transform:translateX(calc(100vw - 100% - 96px))}}
-    .orizz-fermo .wrap{overflow:visible}
-  }
+@media (min-width:1024px) and (prefers-reduced-motion:no-preference){
+  .js .orizz{height:260vh}
+  .js .orizz-fermo{position:sticky;top:0;height:100vh;overflow:hidden;display:flex;flex-direction:column;justify-content:center}
+  .js .orizz-testa{padding:0 0 clamp(28px,4vw,48px)}
+  .js .passi{display:flex;gap:28px;padding-bottom:0;width:max-content;transform:translate3d(var(--tx,0px),0,0);will-change:transform}
+  .js .passi li{width:min(38vw,520px);min-height:min(46vh,420px);flex:none}
 }
 
 /* pacchetti */

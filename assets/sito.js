@@ -21,6 +21,11 @@
     an.addEventListener("pointerup",fine_);an.addEventListener("pointercancel",fine_);
     an.addEventListener("click",function(e){if(mosso){e.preventDefault();e.stopPropagation()}},true);
     an.addEventListener("dragstart",function(e){e.preventDefault()})}
+  /* come funziona: le carte scorrono in orizzontale mentre la pagina scorre (solo da 1024 px) */
+  var oz=document.querySelector(".orizz"),pa=oz&&oz.querySelector(".passi");
+  if(oz&&pa&&!ridotto){var mq=matchMedia("(min-width:1024px)");
+    function orizz(){if(!mq.matches){pa.style.setProperty("--tx","0px");return}var w=pa.parentElement,cs=getComputedStyle(w),vis=w.clientWidth-parseFloat(cs.paddingLeft)-parseFloat(cs.paddingRight),max=Math.max(0,pa.scrollWidth-vis),corsa=oz.offsetHeight-innerHeight,p=corsa>0?Math.min(1,Math.max(0,(scrollY-oz.offsetTop)/corsa)):1;pa.style.setProperty("--tx",(-max*p).toFixed(1)+"px")}
+    orizz();addEventListener("scroll",orizz,{passive:true});addEventListener("resize",orizz);addEventListener("load",orizz)}
   /* pulsanti magnetici */
   if(fine&&!ridotto){document.querySelectorAll(".btn").forEach(function(el){el.addEventListener("pointermove",function(e){var r=el.getBoundingClientRect(),x=(e.clientX-r.left-r.width/2)/r.width,y=(e.clientY-r.top-r.height/2)/r.height;el.style.translate=(x*10)+"px "+(y*8)+"px"});el.addEventListener("pointerleave",function(){el.style.translate=""})})}
   /* cursore ad anello */
