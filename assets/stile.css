@@ -108,12 +108,6 @@ p{text-wrap:pretty}
 .menu .btn{min-height:60px;margin-top:auto;background:#fff;color:var(--ink)}
 .menu .btn::before{background:var(--corallo)}
 
-/* ---------- cursore (solo con mouse) ---------- */
-.cursore{display:none}
-@media (hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){
-  .cursore{display:block;position:fixed;left:0;top:0;width:40px;height:40px;margin:-20px 0 0 -20px;border:1.5px solid var(--ink);border-radius:50%;pointer-events:none;z-index:90;mix-blend-mode:difference;border-color:#fff;transform:translate(var(--x,-100px),var(--y,-100px)) scale(var(--s,1));transition:transform .12s linear,opacity .3s;opacity:var(--o,0)}
-}
-
 /* ---------- aurora (aperture chiare) ---------- */
 .hero,.testata,.centro{position:relative;background:var(--osso);isolation:isolate;overflow:hidden;overflow:clip}
 .aurora{position:absolute;inset:0;z-index:-1;pointer-events:none;overflow:hidden}

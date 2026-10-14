@@ -28,10 +28,4 @@
     orizz();addEventListener("scroll",orizz,{passive:true});addEventListener("resize",orizz);addEventListener("load",orizz)}
   /* pulsanti magnetici */
   if(fine&&!ridotto){document.querySelectorAll(".btn").forEach(function(el){el.addEventListener("pointermove",function(e){var r=el.getBoundingClientRect(),x=(e.clientX-r.left-r.width/2)/r.width,y=(e.clientY-r.top-r.height/2)/r.height;el.style.translate=(x*10)+"px "+(y*8)+"px"});el.addEventListener("pointerleave",function(){el.style.translate=""})})}
-  /* cursore ad anello */
-  var cu=document.querySelector(".cursore");
-  if(cu&&fine&&!ridotto){var cx=-100,cy=-100,tx=-100,ty=-100,vis=false;
-    addEventListener("pointermove",function(e){tx=e.clientX;ty=e.clientY;if(!vis){vis=true;cu.style.setProperty("--o",1)}var t=e.target.closest&&e.target.closest("a,button,summary,.giostra-anello");cu.style.setProperty("--s",t?1.9:1)},{passive:true});
-    document.addEventListener("mouseleave",function(){cu.style.setProperty("--o",0)});
-    (function anima(){cx+=(tx-cx)*.22;cy+=(ty-cy)*.22;cu.style.setProperty("--x",cx+"px");cu.style.setProperty("--y",cy+"px");requestAnimationFrame(anima)})()}
 })();
